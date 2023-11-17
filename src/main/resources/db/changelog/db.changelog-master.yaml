@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+        file: db/changelog/000_create_user_table.sql
+  - include:
+      file: db/changelog/001_insert_users.sql
+  - include:
+      file: db/changelog/002_create_car_table.sql
+  - include:
+      file: db/changelog/003_insert_cars.sql
