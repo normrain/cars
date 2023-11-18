@@ -2,9 +2,11 @@ package com.example.hometask.domain.cars.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "cars")
+@Getter
 public class Car {
 
     @Id
