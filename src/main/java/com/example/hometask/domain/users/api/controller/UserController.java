@@ -21,6 +21,7 @@ import java.util.Optional;
 @ControllerAdvice
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

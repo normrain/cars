@@ -2,19 +2,16 @@ package com.example.hometask.domain.cars.service;
 
 import com.example.hometask.domain.cars.api.model.CarResponse;
 import com.example.hometask.domain.cars.entity.Car;
-import com.example.hometask.domain.cars.reporitory.CarRepository;
-import com.example.hometask.domain.users.entity.User;
-import com.example.hometask.domain.users.service.UserService;
+import com.example.hometask.domain.cars.repository.CarRepository;
 import com.example.hometask.util.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.example.hometask.util.Response.ResponseUtil.*;
+import static com.example.hometask.util.Sorting.SortingUtil.createSorting;
+
 
 @Service
 @AllArgsConstructor
@@ -60,12 +57,29 @@ public class CarService {
                 .build();
     }
 
+    private List<CarResponse> mapCarEntityToResponse(List<Car> cars) {
+        return cars.stream().map(
+                car -> CarResponse.builder()
+                        .id(car.getId())
+                        .make(car.getMake())
+                        .model(car.getModel())
+                        .numberplate(car.getNumberplate())
+                        .build()
+        ).collect(Collectors.toList());
+    }
 
-
-
-
-
-
-
-
+    private List<CarResponse> mapFilteredCarEntityToResponse(List<Car> cars, String find) {
+        return cars.stream()
+                .filter(car -> car.getMake().contains(find) ||
+                        car.getModel().contains(find)
+                        || car.getNumberplate().contains(find))
+                .map(
+                        car -> CarResponse.builder()
+                                .id(car.getId())
+                                .make(car.getMake())
+                                .model(car.getModel())
+                                .numberplate(car.getNumberplate())
+                                .build()
+                ).collect(Collectors.toList());
+    }
 }

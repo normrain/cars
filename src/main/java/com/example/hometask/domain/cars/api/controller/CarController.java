@@ -19,6 +19,7 @@ import java.util.List;
 @ControllerAdvice
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/cars")
+@CrossOrigin(origins = "*")
 public class CarController {
 
     private final CarService carService;

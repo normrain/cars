@@ -2,11 +2,12 @@ package com.example.hometask.domain.cars.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Table(name = "cars")
 @Getter
+@Setter
 public class Car {
 
     @Id
@@ -20,4 +21,5 @@ public class Car {
     private String numberplate;
     @Column(name = "user_id")
     private Long userId;
+
 }

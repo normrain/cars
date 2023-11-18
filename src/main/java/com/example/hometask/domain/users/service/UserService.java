@@ -1,7 +1,6 @@
 package com.example.hometask.domain.users.service;
 
 import com.example.hometask.domain.cars.api.model.CarResponse;
-import com.example.hometask.domain.cars.entity.Car;
 import com.example.hometask.domain.users.api.model.UserResponse;
 import com.example.hometask.domain.cars.service.CarService;
 import com.example.hometask.domain.users.entity.User;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.hometask.util.Response.ResponseUtil.createSorting;
+import static com.example.hometask.util.Sorting.SortingUtil.createSorting;
 
 @Service
 @AllArgsConstructor
@@ -69,6 +68,4 @@ public class UserService {
                         .build()
         ).collect(Collectors.toList());
     }
-
-
 }
