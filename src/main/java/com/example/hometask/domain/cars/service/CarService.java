@@ -69,10 +69,11 @@ public class CarService {
     }
 
     private List<CarResponse> mapFilteredCarEntityToResponse(List<Car> cars, String find) {
+        String regexForSearch = "(?i).*" + find + ".*";
         return cars.stream()
-                .filter(car -> car.getMake().contains(find) ||
-                        car.getModel().contains(find)
-                        || car.getNumberplate().contains(find))
+                .filter(car -> car.getMake().matches(regexForSearch) ||
+                        car.getModel().matches(regexForSearch)
+                        || car.getNumberplate().matches(regexForSearch))
                 .map(
                         car -> CarResponse.builder()
                                 .id(car.getId())

@@ -1,0 +1,9 @@
+.mat-column-id {
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+
+}
+.mat-column-name {
+  border-right: 1px solid currentColor;
+}
+

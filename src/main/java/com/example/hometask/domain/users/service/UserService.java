@@ -58,8 +58,9 @@ public class UserService {
     }
 
     private List<UserResponse> mapFilteredUserEntityToResponse(List<User> users, String find) {
+        String regexForSearch = "(?i).*" + find + ".*";
         return users.stream()
-                .filter(user -> user.getName().contains(find))
+                .filter(user -> user.getName().matches(regexForSearch))
                 .map(
                 user -> UserResponse.builder()
                         .id(user.getId())

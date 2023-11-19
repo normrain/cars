@@ -1,0 +1,10 @@
+.mat-column-id {
+  border-right: 1px solid currentColor;
+}
+.mat-column-make {
+  border-right: 1px solid currentColor;
+}
+.mat-column-model {
+  border-right: 1px solid currentColor;
+}
+

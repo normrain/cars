@@ -1,0 +1,29 @@
+<h2>{{title}}</h2>
+<div *ngIf="loading; else list">
+  <p>Loading...</p>
+</div>
+
+<ng-template class="table" #list>
+  <table mat-table [dataSource]="users">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.id }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.name }} </mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="cars">
+      <mat-header-cell *matHeaderCellDef> Cars </mat-header-cell>
+      <mat-cell  *matCellDef="let item">
+        <mat-list>
+            <mat-list-item *ngFor="let car of item.cars">
+              Id: {{car.id}}, Make: {{car.make}}, Model: {{car.model}}, Number Plate: {{car.numberplate}}
+            </mat-list-item>
+        </mat-list>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+</ng-template>
