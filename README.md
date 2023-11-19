@@ -19,6 +19,8 @@ This task builds the webapp, and copies the files into the static directory of t
 
 If the application is being run with Docker, the container needs to be published on port `8080`.
 
+Once the application runs, a swagger documentation can be found at ``/swagger-ui.html``
+
 ## Tests
 The integration tests use `testcontainer` to provide database functionality. This means that docker needs to run when 
 the integration test are executed
