@@ -23,7 +23,7 @@ public class CarController {
 
     private final CarService carService;
     @GetMapping()
-    @Operation(summary = "")
+    @Operation(summary = "Returns all Cars, with optional search term & sorting")
     public List<CarResponse> getAllCars(
             @RequestParam @Nullable String find,
             @RequestParam @Nullable String sort
@@ -32,7 +32,7 @@ public class CarController {
     }
 
     @GetMapping(path = "/{carId}")
-    @Operation(summary = "")
+    @Operation(summary = "Returns a single car")
     public CarResponse getSingleCar(
             @PathVariable Long carId
     ) throws EntityNotFoundException {

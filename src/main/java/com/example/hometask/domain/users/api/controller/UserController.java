@@ -25,7 +25,7 @@ public class UserController {
     private final CarService carService;
 
     @GetMapping()
-    @Operation(summary = "")
+    @Operation(summary = "Returns all users with cars, with optional search term and sorting")
     public List<UserResponse> getAllUsers(
             @RequestParam @Nullable String find,
             @RequestParam @Nullable String sort
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}")
-    @Operation(summary = "")
+    @Operation(summary = "Returns a single user")
     public UserResponse getSingleUser(
             @PathVariable Long userId
     ) throws EntityNotFoundException {
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}/cars")
-    @Operation(summary = "")
+    @Operation(summary = "Returns cars of a specific user")
     public List<CarResponse> getCarsForUser(
             @PathVariable Long userId
     ) throws EntityNotFoundException {

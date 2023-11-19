@@ -1,7 +1,10 @@
 package utils;
 
 import com.example.hometask.domain.cars.entity.Car;
+import com.example.hometask.domain.users.api.model.UserResponse;
 import com.example.hometask.domain.users.entity.User;
+
+import java.util.List;
 
 public class TestObjectCreator {
 

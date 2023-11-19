@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,8 +48,11 @@ class CarControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].make").value("Toyota"))
-                .andExpect(jsonPath("$[1].model").value("Civic"));
-        // Add more assertions as needed
+                .andExpect(jsonPath("$[0].model").value("Corolla"))
+                .andExpect(jsonPath("$[0].numberplate").value("ABC123"))
+                .andExpect(jsonPath("$[1].make").value("Honda"))
+                .andExpect(jsonPath("$[1].model").value("Civic"))
+                .andExpect(jsonPath("$[1].numberplate").value("XYZ789"));
     }
 
     @Test
@@ -62,9 +67,17 @@ class CarControllerTest {
         mockMvc.perform(get("/api/v1/cars/{carId}", carId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.make").value("Toyota"))
+                .andExpect(jsonPath("$.numberplate").value("ABC123"))
                 .andExpect(jsonPath("$.numberplate").value("ABC123"));
-        // Add more assertions as needed
     }
 
-    // Add more test cases to cover different scenarios and edge cases
+    @Test
+    void testGetSingleCarWithInvalidParameter() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(carController).build();
+
+        mockMvc.perform(get("/api/v1/cars/{carId}", "a"))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
 }

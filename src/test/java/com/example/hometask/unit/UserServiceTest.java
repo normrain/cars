@@ -12,11 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static utils.TestObjectCreator.createNewUser;
 
@@ -42,9 +40,9 @@ class UserServiceTest {
         User mockUser = createNewUser(userId, "John Doe");
         when(userRepository.findById(userId)).thenReturn(Optional.of(mockUser));
 
-        List<CarResponse> mockCarResponses = new ArrayList<>();
-        mockCarResponses.add(new CarResponse(1L, "Toyota", "Corolla", "ABC123"));
-        mockCarResponses.add(new CarResponse(2L, "Honda", "Civic", "XYZ789"));
+        List<CarResponse> mockCarResponses = List.of(
+        new CarResponse(1L, "Toyota", "Corolla", "ABC123"),
+        new CarResponse(2L, "Honda", "Civic", "XYZ789"));
 
         when(carService.getCarsForUser(userId)).thenReturn(mockCarResponses);
 
@@ -53,7 +51,6 @@ class UserServiceTest {
         assertNotNull(result);
         assertEquals("John Doe", result.name());
         assertEquals(2, result.cars().size());
-        // Add more assertions as needed
     }
 
     @Test
@@ -66,14 +63,12 @@ class UserServiceTest {
 
     @Test
     void testGetUsersWithCars() {
-        when(userRepository.findAll()).thenReturn(new ArrayList<>());
+        when(userRepository.findAll()).thenReturn(List.of(createNewUser(1L, "John Doe")));
 
         List<UserResponse> result = userService.getUsersWithCars(null, null);
 
         assertNotNull(result);
-        assertEquals(0, result.size());
-        // Add more assertions as needed
+        assertEquals(1, result.size());
+        assertEquals("John Doe", result.get(0).name());
     }
-
-    // Add more test cases to cover different scenarios and edge cases
 }

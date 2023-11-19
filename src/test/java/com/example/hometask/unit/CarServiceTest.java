@@ -39,9 +39,10 @@ public class CarServiceTest {
     @Test
     void testGetCarsForUser() {
         Long userId = 1L;
-        List<Car> mockCars = new ArrayList<>();
-        mockCars.add(createNewCar(1L, "Toyota", "Corolla", "ABC123"));
-        mockCars.add(createNewCar(2L, "Honda", "Civic", "XYZ789"));
+        List<Car> mockCars = List.of(
+                createNewCar(1L,"Toyota", "Corolla", "ABC123"),
+                createNewCar(2L, "Honda", "Civic", "XYZ789")
+        );
 
         when(carRepository.findCarsByUserId(userId)).thenReturn(mockCars);
 
@@ -50,18 +51,20 @@ public class CarServiceTest {
         assertEquals(2, result.size());
         assertEquals("Toyota", result.get(0).make());
         assertEquals("Civic", result.get(1).model());
-        // Add more assertions as needed
     }
 
     @Test
     void testGetCars() {
-        when(carRepository.findAll()).thenReturn(new ArrayList<>());
+        when(carRepository.findAll()).thenReturn(List.of(
+                createNewCar(1L,"Toyota", "Corolla", "ABC123"),
+                createNewCar(2L, "Honda", "Civic", "XYZ789")
+        ));
 
         List<CarResponse> result = carService.getCars(null, null);
 
         assertNotNull(result);
-        assertEquals(0, result.size());
-        // Add more assertions as needed
+        assertEquals("Toyota", result.get(0).make());
+        assertEquals("Civic", result.get(1).model());
     }
 
     @Test
@@ -75,7 +78,6 @@ public class CarServiceTest {
 
         assertNotNull(result);
         assertEquals("Toyota", result.make());
-        // Add more assertions as needed
     }
 
     @Test
@@ -86,6 +88,4 @@ public class CarServiceTest {
 
         assertThrows(EntityNotFoundException.class, () -> carService.getCarWithId(carId));
     }
-
-    // Add more test cases to cover different scenarios and edge cases
 }

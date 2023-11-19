@@ -49,13 +49,12 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].name").value("John Doe"));
-        // Add more assertions as needed
     }
 
     @Test
     void testGetSingleUser() throws Exception {
         Long userId = 1L;
-        UserResponse mockUserResponse = new UserResponse(userId, "John Doe", new ArrayList<>()); // Assuming an empty list of cars
+        UserResponse mockUserResponse = new UserResponse(userId, "John Doe", new ArrayList<>());
 
         when(userService.getUserWithId(userId)).thenReturn(mockUserResponse);
 
@@ -64,7 +63,6 @@ class UserControllerTest {
         mockMvc.perform(get("/api/v1/users/{userId}", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John Doe"));
-        // Add more assertions as needed
     }
 
     @Test
@@ -81,8 +79,5 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].make").value("Toyota"));
-        // Add more assertions as needed
     }
-
-    // Add more test cases to cover different scenarios and edge cases
 }
