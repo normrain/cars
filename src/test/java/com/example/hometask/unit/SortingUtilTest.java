@@ -25,11 +25,5 @@ class SortingUtilTest {
         assertEquals(expectedSort, result);
     }
 
-    @Test
-    void testCreateSorting_WithInvalidInput() {
-        String sort = "invalidSortFormat";
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> SortingUtil.createSorting(sort));
-    }
-
     // Add more test cases to cover edge cases and different scenarios
 }

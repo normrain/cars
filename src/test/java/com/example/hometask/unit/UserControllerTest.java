@@ -41,11 +41,11 @@ class UserControllerTest {
         List<UserResponse> mockUserResponses = new ArrayList<>();
         mockUserResponses.add(new UserResponse(1L, "John Doe", new ArrayList<>())); // Assuming an empty list of cars
 
-        when(userService.getUsersWithCars(anyString(), anyString())).thenReturn(mockUserResponses);
+        when(userService.getUsersWithCars("John", "name:desc")).thenReturn(mockUserResponses);
 
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-        mockMvc.perform(get("/api/v1/users"))
+        mockMvc.perform(get("/api/v1/users?find=John&sort=name:desc"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].name").value("John Doe"));

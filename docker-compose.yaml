@@ -3,7 +3,7 @@ services:
     image: 'postgres:latest'
     container_name: 'postgres'
     environment:
-      - "POSTGRES_DB=test"
+      - "POSTGRES_DB=hometask"
       - "POSTGRES_PASSWORD=postgres"
       - "POSTGRES_USER=postgres"
     ports:

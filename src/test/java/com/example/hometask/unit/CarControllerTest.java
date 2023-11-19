@@ -38,11 +38,11 @@ class CarControllerTest {
         mockCarResponses.add(new CarResponse(1L, "Toyota", "Corolla", "ABC123"));
         mockCarResponses.add(new CarResponse(2L, "Honda", "Civic", "XYZ789"));
 
-        when(carService.getCars(anyString(), anyString())).thenReturn(mockCarResponses);
+        when(carService.getCars("test", "name:asc")).thenReturn(mockCarResponses);
 
         mockMvc = MockMvcBuilders.standaloneSetup(carController).build();
 
-        mockMvc.perform(get("/api/v1/cars"))
+        mockMvc.perform(get("/api/v1/cars?find=test&sort=name:asc"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].make").value("Toyota"))
